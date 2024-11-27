@@ -10,9 +10,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.dates import DateFormatter, AutoDateLocator,HourLocator,DayLocator,MonthLocator
 
-date="11-25_26"
-actDate="1124"
-endDate="1126"
+date="11-28_29"
+actDate="1127"
+endDate="1129"
 estTime=15
 
 urls=["https://www.weatherbug.com/weather-forecast/hourly/seattle-wa-98104?hour=2024"+endDate+"18",
