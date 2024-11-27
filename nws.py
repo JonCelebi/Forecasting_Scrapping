@@ -10,16 +10,16 @@ import matplotlib.pyplot as plt
 from matplotlib.dates import DateFormatter, AutoDateLocator,HourLocator,DayLocator,MonthLocator
 
 
-dates=["11-25","11-26"]
-actDate="1124"
-estTime=15
+dates=["11-28","11-29"]
+actDate="1127"
+estTime=14
 date=dates[0]+"_"+dates[1][3:5]
 
 def url(p,k):
     urls=["https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&w13u=0&w16u=1&AheadHour="+str(24-(estTime-3)+k)+"&Submit=Submit&FcstType=digital&textField1=47.6218&textField2=-122.3503&site=all&unit=0&dd=&bw=",
           "https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&w13u=0&w16u=1&w17u=1&pqpfhr=6&psnwhr=6&AheadHour="+str(24-(estTime-2)+k)+"&Submit=Submit&FcstType=digital&textField1=39.4979&textField2=-106.0471&site=all&unit=0&dd=&bw=",
     "https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&w13u=0&w14u=1&w15u=1&AheadHour="+str(24-(estTime-1)+k)+"&Submit=Submit&FcstType=digital&textField1=35.223&textField2=-97.439&site=all&unit=0&dd=&bw=",
-    "https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&w13u=0&w16u=1&pqpfhr=6&psnwhr=6&AheadHour="+str(24-(estTime-1)+k)+"&Submit=Submit&FcstType=digital&textField1=47.917&textField2=-97.0555&site=all&unit=0&dd=&bw=", 
+    "https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&w13u=0&w16u=1&pqpfhr=6&psnwhr=6&AheadHour="+str(24-(estTime-1)+k)+"&Submit=Submit&FcstType=digital&textField1=47.917&textField2=-97.0555&site=all&unit=0&dd=&bw=",
     "https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=hi&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w10u=0&w12u=1&w13u=1&pqpfhr=6&AheadHour="+str(24-(estTime)+k)+"&Submit=Submit&FcstType=digital&textField1=25.77&textField2=-80.2&site=all&unit=0&dd=&bw=",
     "https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&AheadHour="+str(24-(estTime)+k)+"&Submit=Submit&FcstType=digital&textField1=40.7198&textField2=-73.993&site=all&unit=0&dd=&bw=",
     "https://forecast.weather.gov/MapClick.php?w0=t&w1=td&w2=wc&w3=sfcwind&w3u=1&w4=sky&w5=pop&w6=rh&w7=rain&w8=thunder&w9=snow&w10=fzg&w11=sleet&w13u=0&w15u=1&w16u=1&AheadHour="+str(24-(estTime)+k)+"&Submit=Submit&FcstType=digital&textField1=40.4447&textField2=-86.9119&site=all&unit=0&dd=&bw="]
@@ -61,7 +61,6 @@ while (p<7):
     lines = s.find_all('b')
 
     for line in lines:
-        print(line.get_text())
         temp.append(line.get_text())
 
     browser.get(url(p,values[1]))
@@ -73,7 +72,6 @@ while (p<7):
     lines = s.find_all('b')
 
     for line in lines:
-        print(line.get_text())
         temp2.append(line.get_text())
     browser.quit()
 
