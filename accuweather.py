@@ -74,7 +74,6 @@ while (p<7):
             if (any(x in line.get_text() for x in keywordFilter)):
                 continue
             else:
-                print(line.get_text())
                 temp.append(line.get_text())
 
         for line in lines2:
