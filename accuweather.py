@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 from matplotlib.dates import DateFormatter, AutoDateLocator,HourLocator,DayLocator,MonthLocator
 
 
-dates=["11-25","11-26"]
-actDate="1124"
+dates=["11-28","11-29"]
+actDate="1127"
 date=dates[0]+"_"+dates[1][3:5]
 
 def url(p,k):
@@ -69,11 +69,12 @@ while (p<7):
 
         s2 = soup.find('div',class_="hourly-wrapper content-module")
         lines2 = s.find_all('div',class_=['temp','real-feel__text','precip'])
-
+        keywordFilter=["Air","Max","Rea","Rai","Sno","Warning","Watch","Advisory","Statement","AM","PM"]
         for line in lines:
-            if((line.get_text()[0:3]=="Air") or (line.get_text()[0:3]=="Max") or (line.get_text()[0:3]=="Rea") or (line.get_text()[0:3]=="Rai") or (line.get_text()[0:3]=="Sno")):
+            if (any(x in line.get_text() for x in keywordFilter)):
                 continue
             else:
+                print(line.get_text())
                 temp.append(line.get_text())
 
         for line in lines2:
@@ -133,11 +134,6 @@ while (p<7):
     df.to_csv(file_path,index=False)
 
     p=p+1
-
-
-
-
-
 
 
 
