@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.dates import DateFormatter, AutoDateLocator,HourLocator,DayLocator,MonthLocator
 from scipy.stats import pearsonr
+import seaborn as sns
 
 
 locations=['seattle','brecken','norman','grand','miami','ny','laf']
@@ -91,7 +92,7 @@ for website in websites:
 #count how many events from 0-10
 #and then i see how many of those events actually has a precip flag
 
-
+print(percentage_correct_real_accu.__len__)
 
 
 x_labels = [f"{low}-{high}" for low, high in brackets]
@@ -111,7 +112,6 @@ plt.plot(x_positions, y2, color="black")
 plt.fill_between(x_positions, y1, y2, color='gray', alpha=0.5, label='Expected Confidence vs. Accuracy')
 
 
-
 # Customize plot
 plt.xticks(x_positions, x_labels, rotation=45)
 plt.xlabel("Predicted Probability of Precipitation(%)")
@@ -125,28 +125,41 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
-print(list(percentage_correct_real_nws.values()))
+m1, b1 = np.polyfit(x_positions[0:9], list(percentage_correct_real_accu.values())[0:9], 1)
+m2, b2 = np.polyfit(x_positions, list(percentage_correct_real_wb.values()), 1)
+m3, b3 = np.polyfit(x_positions, list(percentage_correct_real_wund.values()), 1)
+m4, b4 = np.polyfit(x_positions[0:8], list(percentage_correct_real_apple.values())[0:8], 1)
+m5, b5 = np.polyfit(x_positions, list(percentage_correct_real_nws.values()), 1)
+
+print(m1,b1)
+print(x_positions)
+
+plt.plot(x_positions, m1*x_positions + b1, color='blue', label="AccuWeather")
+plt.plot(x_positions, m2*x_positions + b2, color='red', label=f'Weatherbug')
+plt.plot(x_positions, m3*x_positions + b3, color='green', label=f'Wunderground')
+plt.plot(x_positions, m4*x_positions + b4, color='orange', label=f'Apple')
+plt.plot(x_positions, m5*x_positions + b5, color='magenta', label=f'NWS')
 
 
+plt.plot(x_positions, y1, color="black")
+plt.plot(x_positions, y2, color="black")
+plt.fill_between(x_positions, y1, y2, color='gray', alpha=0.5, label='Expected Confidence vs. Accuracy')
 
-# Calculate Pearson correlation
-correlation, p_value = pearsonr(x_positions[0:9], list(percentage_correct_real_accu.values())[0:9])
+# Customize plot
+plt.xticks(x_positions, x_labels, rotation=45)
+plt.xlabel("Predicted Probability of Precipitation(%)")
+plt.yticks(np.arange(0, 1.1, 0.1))
+plt.ylabel("Percentage of Events Rained")
+plt.title("Precipitation Calibration Regression Lines for Different Websites")
+plt.grid(True, linestyle="--", alpha=0.6)
+plt.legend()
 
-print(f"Pearson's correlation coefficient: {correlation}")
+# Show plot
+plt.tight_layout()
+plt.show()
 
-correlation, p_value = pearsonr(x_positions, list(percentage_correct_real_wb.values()))
-
-print(f"Pearson's correlation coefficient: {correlation}")
-
-correlation, p_value = pearsonr(x_positions, list(percentage_correct_real_wund.values()))
-
-print(f"Pearson's correlation coefficient: {correlation}")
-
-correlation, p_value = pearsonr(x_positions[0:8], list(percentage_correct_real_apple.values())[0:8])
-
-print(f"Pearson's correlation coefficient: {correlation}")
-
-correlation, p_value = pearsonr(x_positions, list(percentage_correct_real_nws.values()))
-
-print(f"Pearson's correlation coefficient: {correlation}")
+sns.regplot(data=data, x='x', y='y', ci=95)  # `ci=95` for 95% confidence interval
+plt.title('Seaborn Regression Plot with Confidence Bands')
+plt.grid(alpha=0.3)
+plt.show()
 
