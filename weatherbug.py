@@ -1,14 +1,9 @@
 import re
-import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 import time
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.dates import DateFormatter, AutoDateLocator,HourLocator,DayLocator,MonthLocator
 
 date="11-28_29"
 actDate="1127"
