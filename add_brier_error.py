@@ -68,30 +68,7 @@ for day in days:
             j+=1
 
 
-for day in days:
-    for website in websites:
-        j=0
-        while (j < len(locations)):
-            current_location = locations[j]
 
-            forecast=pd.read_csv("C:/Users/jonat/Downloads/vscode/forecasts_11-"+str(day)+"/"+website+"11"+
-                             str(day)+"_11-"+str(day+1)+"_"+str(day+2)+"_"+current_location+".csv")
-            
-            cum_precip_chance=forecast['Precip_Chance'].sum()
-
-
-
-
-            forecast['Brier_Score']=((forecast['Precip_Chance']/100)-allObs[current_location]
-                                     [(24+(day-23)*24):24+(((day+2)-23)*24)]["precip_flag"].reset_index(drop=True))**2
-            forecast['Temp_Absolute_Error']=np.abs(forecast['Temperature']-allObs[current_location]
-                                                   [(23+(day-23)*24):23+(((day+2)-23)*24)]["tmpf"].reset_index(drop=True))
-            forecast['Temp_Error(forecast-obs)']=forecast['Temperature']-allObs[current_location][(23+(day-23)*24):23+(((day+2)-23)*24)]["tmpf"].reset_index(drop=True)
-            
-            forecast.to_csv("C:/Users/jonat/Downloads/vscode/forecasts_11-"+str(day)+"/"+website+"11"+
-                             str(day)+"_11-"+str(day+1)+"_"+str(day+2)+"_"+current_location+".csv",index=False)
-
-            j+=1
 
 #7 locations, day1-2, 4 websites
 
